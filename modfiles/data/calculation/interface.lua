@@ -1,5 +1,6 @@
 require("sequential_solver")
 require("matrix_solver")
+local simplex_solver = require("simplex/solver")
 require("structures")
 
 calculation = {
@@ -173,7 +174,7 @@ function calculation.update(player, subfactory)
         player_table.active_subfactory = subfactory
 
         local subfactory_data = calculation.interface.generate_subfactory_data(player, subfactory)
-
+        simplex_solver.solve(subfactory_data)
         if subfactory.matrix_free_items ~= nil then  -- meaning the matrix solver is active
             local matrix_metadata = matrix_solver.get_matrix_solver_metadata(subfactory_data)
 
